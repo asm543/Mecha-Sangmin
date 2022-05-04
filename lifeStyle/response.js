@@ -42,6 +42,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             replier.reply(selectIndex(cmd[1], cmd[2]).sort((a,b)=>a-b));
           } else replier.reply("유효한 범위의 숫자를 입력해주세요.");
           break;
-       }
+        }
+    }
+    case "따라하기" :{
+        replier.reply(cmd[1]);
     }
 }
