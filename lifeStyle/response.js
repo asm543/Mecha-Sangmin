@@ -43,8 +43,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
           } else replier.reply("유효한 범위의 숫자를 입력해주세요.");
           break;
         }
-    }
-    case "따라하기" :{
-        replier.reply(cmd[1]);
+        case "따라하기" :{
+            replier.reply(cmd[1]);
+            break;
+        }
     }
 }
