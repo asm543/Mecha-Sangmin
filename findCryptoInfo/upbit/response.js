@@ -5,6 +5,10 @@
 업비트에서 암호화페 가격 정보를 뜯어와요
 */
 
+function numEstablish(num) {
+  return num.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function getCoinMark(name) {
     var data = Utils.parse("https://api.upbit.com/v1/market/all").text();
     data = JSON.parse(data);
@@ -121,7 +125,7 @@ function upbitCalc(cmd) {
       "https://api.upbit.com/v1/ticker?markets=" + mark
     ).text();
     data = JSON.parse(data);
-    return data[0].trade_price * Number(cmd[1]) + "원";
+    return numEstablish("" + (data[0].trade_price * Number(cmd[1]))) + "원";
   }
 }
 
@@ -136,7 +140,7 @@ function response(room, msg, sender, isGroupChat, replier) {
         } else {
             var data = Utils.parse("https://api.upbit.com/v1/ticker?markets=" + mark).text();
             data = JSON.parse(data);
-            replier.reply("현재 " + getCoinName(cmd[1]) + " 시세는 " + data[0].trade_price + "원입니다.");
+            replier.reply("현재 " + getCoinName(cmd[1]) + " 시세는 " + numEstablish("" + data[0].trade_price) + "원입니다.");
             break;
         }
       }
