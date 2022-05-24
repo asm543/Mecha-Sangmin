@@ -111,7 +111,7 @@ function response(room, msg, sender, isGroupChat, replier) {
                         text = "USDT 입니다.";
                         break;
                 }
-                replier.reply(getUpSymbol(cmd[1]) + "의 현재 가격은 " + numEstablish(data[0].trade_price) + text);
+                replier.reply(getUpSymbol(cmd[1]) + "의 현재 가격은 " + numEstablish(data[0].trade_price) + text + "\n(전일대비 : " + dotRegex(data[0].change_rate * 100, 3) + "%)");
                 break;
             }
         }
