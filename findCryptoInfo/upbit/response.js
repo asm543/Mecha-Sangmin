@@ -100,7 +100,7 @@ function response(room, msg, sender, isGroupChat, replier) {
                 var data = Utils.parse("https://api.upbit.com/v1/ticker?markets=" + mark).text();
                 var text = "원 입니다.";
                 data = JSON.parse(data);
-                var riseOrFall = data[0].change == "RISE" ? "" : "-"
+                var riseOrFall = data[0].change == "RISE" ? "▲" : "▼"
                 switch (mark.split("-")[0]) {
                     case "KRW":
                         text = "원 입니다.";
@@ -112,7 +112,7 @@ function response(room, msg, sender, isGroupChat, replier) {
                         text = "USDT 입니다.";
                         break;
                 }
-                replier.reply(getUpSymbol(cmd[1]) + "의 현재 가격은 " + numEstablish(data[0].trade_price) + text + "\n(전일대비 : " + riseOrFall + dotRegex(data[0].change_rate * 100, 3) + "%)");
+                replier.reply("업비트의 " + getUpSymbol(cmd[1]) + "가격 : " + numEstablish(data[0].trade_price) + text + "\n(전일대비 : " + riseOrFall + dotRegex(data[0].change_rate * 100, 3) + "%)");
                 break;
             }
         }
