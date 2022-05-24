@@ -100,7 +100,7 @@ function response(room, msg, sender, isGroupChat, replier) {
                 var data = Utils.parse("https://api.upbit.com/v1/ticker?markets=" + mark).text();
                 var text = "원 입니다.";
                 data = JSON.parse(data);
-                var riseOrFall = data[0].change == "RISE" ? "▲" : "▼"
+                var riseOrFall = data[0].change == "RISE" ? "+" : "-"
                 switch (mark.split("-")[0]) {
                     case "KRW":
                         text = "원 입니다.";
