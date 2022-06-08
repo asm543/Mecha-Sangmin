@@ -160,6 +160,22 @@ function response(room, msg, sender, isGroupChat, replier) {
             replier.reply("바이낸스 심볼 " + cmd[1] + " 삭제되었습니다.");
             break;
         }
+        case "김프": {
+            var mark = getUpSymbol(cmd[1]);
+            if (mark == null) {
+                replier.reply(cmd[1] + "(이)라는 암호화폐를 찾을 수 없습니다.\n심볼을 마켓명-심볼명 형식으로 등록해주세요.\nex) 업추가 비트 KRW-BTC");
+                break;
+            } else if (getBiSymbol(cmd[1]) == undefined || getBiSymbol (cmd[1]) == null) {
+                replier.reply(cmd[1] + "(이)라는 암호화폐를 찾을 수 없습니다.\n심볼을 심볼명+거래단위 형식으로 등록해주세요.\nex) 바추가 비트 BTCBUSD");
+            } else {
+                var data = Utils.parse("https://api.upbit.com/v1/ticker?markets=" + mark).text();
+                data = JSON.parse(data);
+                var up = data[0].trade_price;
+                var bi = dotRegex(getKRWUSDPrice() * getBinancePrice(getBiSymbol(cmd[1])), 3);
+                replier.reply(cmd[1] + "의 김프는 " + dotRegex(((up / bi) - 1) * 100, 3) + "% 입니다.");
+            }
+            break;
+        }
         case "계산": {
             var upbitPrice = upbitCalc(cmd);
             var binancePrice = binanceCalc(cmd);
