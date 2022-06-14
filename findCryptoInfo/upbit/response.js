@@ -88,6 +88,10 @@ function binanceCalc(cmd) {
     }
 }
 
+function getDominance() {
+    return "https://kr.tradingview.com/symbols/CRYPTOCAP-BTC.D/";
+}
+
 function response(room, msg, sender, isGroupChat, replier) {
     var cmd = msg.split(" ");
     switch (cmd[0]) {
@@ -200,6 +204,10 @@ function response(room, msg, sender, isGroupChat, replier) {
         }
         case "지수": {
             replier.reply(getDunamuFng());
+            break;
+        }
+        case "도미": {
+            replier.reply(getDominance());
             break;
         }
     }
