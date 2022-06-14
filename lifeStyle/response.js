@@ -73,8 +73,9 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             break;
         }
         case "점심추천": {
-            var launchList = Object.keys(JSON.stringify(launchSuggest));
-            replier.reply(launchList[Math.floor(Math.random() * launchList.length)]);
+            var launchList = Object.keys(launchSuggest);
+            var randomNum = Math.floor(Math.random() * (launchList.length - 1)) + 1;
+            replier.reply(launchList[randomNum]);
         }
         case "점심목록": {
             replier.reply(JSON.stringify(launchSuggest));
@@ -89,6 +90,27 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         case "점심삭제": {
             delete launchSuggest[cmd[1]];
             fs.write(launch, JSON.stringify(launchSuggest));
+            replier.reply("점심 " + cmd[1] + " 삭제되었습니다.");
+            break;
+        }
+        case "저녁추천": {
+            var dinnerList = Object.keys(dinnerSuggest);
+            var randomNum = Math.floor(Math.random() * (dinnerList.length - 1)) + 1;
+            replier.reply(dinnerList[randomNum]);
+        }
+        case "저녁목록": {
+            replier.reply(JSON.stringify(dinnerSuggest));
+            break;
+        }
+        case "저녁추가": {
+            addDinner(cmd);
+            fs.write(dinner, JSON.stringify(dinnerSuggest));
+            replier.reply("점심 " + cmd[1] + " 추가되었습니다.");
+            break;
+        }
+        case "저녁삭제": {
+            delete dinnerSuggest[cmd[1]];
+            fs.write(dinner, JSON.stringify(dinnerSuggest));
             replier.reply("점심 " + cmd[1] + " 삭제되었습니다.");
             break;
         }
