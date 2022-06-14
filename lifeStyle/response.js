@@ -76,6 +76,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var launchList = Object.keys(launchSuggest);
             var randomNum = Math.floor(Math.random() * (launchList.length - 1)) + 1;
             replier.reply(launchList[randomNum]);
+            break;
         }
         case "점심목록": {
             replier.reply(JSON.stringify(launchSuggest));
@@ -97,6 +98,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             var dinnerList = Object.keys(dinnerSuggest);
             var randomNum = Math.floor(Math.random() * (dinnerList.length - 1)) + 1;
             replier.reply(dinnerList[randomNum]);
+            break;
         }
         case "저녁목록": {
             replier.reply(JSON.stringify(dinnerSuggest));
