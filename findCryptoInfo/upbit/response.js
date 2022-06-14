@@ -184,7 +184,7 @@ function response(room, msg, sender, isGroupChat, replier) {
                 data = JSON.parse(data);
                 var up = data[0].trade_price;
                 var bi = dotRegex(getKRWUSDPrice() * getBinancePrice(getBiSymbol(cmd[1])), 3);
-                replier.reply(cmd[1] + "의 김프는 " + dotRegex(((up / bi) - 1) * 100, 3) + "% 입니다.");
+                replier.reply(cmd[1] + "의 김프는 " + dotRegex(((up / bi) - 1) * 100, 3) + "% 입니다.\n(업비트 : " + dotRegex(up, 3) + "원 / 바이낸스 : " + bi + "원");
             }
             break;
         }
