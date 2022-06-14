@@ -97,7 +97,7 @@ function getDominance() {
 function getConvert(amt, fr, to) {
   var temp = org.jsoup.Jsoup.connect("https://pro-api.coinmarketcap.com/v2/tools/price-conversion?amount=" + amt + "&symbol=" + fr.toUpperCase() + "&convert=" + to.toUpperCase()).header("X-CMC_PRO_API_KEY", "ac3987c6-1247-4091-add3-8084b8aa8477").header("Accepts", "application/json").ignoreContentType(true).get().text();
   temp = JSON.parse(temp);
-  return temp.data[0].amount + temp.data[0].name + "= " + temp.data[0].quote[to.toUpperCase()].price + to.toUpperCase();
+  return temp.data[0].amount + temp.data[0].name + "= " + dotRegex(temp.data[0].quote[to.toUpperCase()].price, 3) + to.toUpperCase();
 }
 
 function response(room, msg, sender, isGroupChat, replier) {
