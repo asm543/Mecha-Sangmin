@@ -94,10 +94,10 @@ function getDominance() {
   return "실시간 BTC 도미넌스 : " + dotRegex(temp.data.btc_dominance, 3) + "\n" + " https://kr.tradingview.com/symbols/CRYPTOCAP-BTC.D/";
 }
 
-function getConvert(fr, to, amt) {
-  var temp = org.jsoup.Jsoup.connect("https://pro-api.coinmarketcap.com/v2/tools/price-conversion&amount=" + amt + "&symbol=" + fr.toUpperCase() + "&convert=" + to.toUpperCase()).header("X-CMC_PRO_API_KEY", "ac3987c6-1247-4091-add3-8084b8aa8477").header("Accepts", "application/json").ignoreContentType(true).get().text();
+function getConvert(amt, fr, to) {
+  var temp = org.jsoup.Jsoup.connect("https://pro-api.coinmarketcap.com/v2/tools/price-conversion?amount=" + amt + "&symbol=" + fr.toUpperCase() + "&convert=" + to.toUpperCase()).header("X-CMC_PRO_API_KEY", "ac3987c6-1247-4091-add3-8084b8aa8477").header("Accepts", "application/json").ignoreContentType(true).get().text();
   temp = JSON.parse(temp);
-  return temp[0].amount + temp[0].name + "= " + temp[0].quote[to.toUpperCase()].price + to.toUpperCase();
+  return temp.data[0].amount + temp.data[0].name + "= " + temp.data[0].quote[to.toUpperCase()].price + to.toUpperCase();
 }
 
 function response(room, msg, sender, isGroupChat, replier) {
