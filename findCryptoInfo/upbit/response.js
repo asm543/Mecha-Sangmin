@@ -177,7 +177,7 @@ function response(room, msg, sender, isGroupChat, replier) {
             if (mark == null) {
                 replier.reply(cmd[1] + "(이)라는 암호화폐를 찾을 수 없습니다.\n심볼을 마켓명-심볼명 형식으로 등록해주세요.\nex) 업추가 비트 KRW-BTC");
                 break;
-            } else if (getBiSymbol(cmd[1]) == undefined || getBiSymbol (cmd[1]) == null) {
+            } else if (getBiSymbol(cmd[1]) == undefined || getBiSymbol(cmd[1]) == null) {
                 replier.reply(cmd[1] + "(이)라는 암호화폐를 찾을 수 없습니다.\n심볼을 심볼명+거래단위 형식으로 등록해주세요.\nex) 바추가 비트 BTCBUSD");
             } else {
                 var data = Utils.parse("https://api.upbit.com/v1/ticker?markets=" + mark).text();
@@ -219,9 +219,17 @@ function response(room, msg, sender, isGroupChat, replier) {
             break;
         }
         case "변환": {
-            if (!Number(cmd[1])){
+            var markFr = getUpSymbol(cmd[2]).split("-")[1];
+            var markTo = getUpSymbol(cmd[3]).split("-")[1];
+            if (markFr == null) {
+                replier.reply(cmd[2] + "(이)라는 암호화폐를 찾을 수 없습니다.\n심볼을 마켓명-심볼명 형식으로 등록해주세요.\nex) 업추가 비트 KRW-BTC");
+                break;
+            } else if (markTo == null) {
+                replier.reply(cmd[3] + "(이)라는 암호화폐를 찾을 수 없습니다.\n심볼을 마켓명-심볼명 형식으로 등록해주세요.\nex) 업추가 비트 KRW-BTC");
+                break;
+            } else if (!Number(cmd[1])){
                 replier.reply("변환실패 - \"변환 1 BTC ETH\" 형식으로 입력해주세요.");
-            } else replier.reply(getConvert(cmd[1], cmd[2], cmd[3]));
+            } else replier.reply(getConvert(cmd[1], markFr, markTo));
             break;
         } 
     }
