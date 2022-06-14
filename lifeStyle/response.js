@@ -74,7 +74,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
         case "점심추천": {
             var launchList = Object.keys(launchSuggest);
-            var randomNum = Math.floor(Math.random() * (launchList.length - 1)) + 1;
+            var randomNum = Math.floor(Math.random() * (launchList.length));
             replier.reply(launchList[randomNum]);
             break;
         }
@@ -96,7 +96,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
         }
         case "저녁추천": {
             var dinnerList = Object.keys(dinnerSuggest);
-            var randomNum = Math.floor(Math.random() * (dinnerList.length - 1)) + 1;
+            var randomNum = Math.floor(Math.random() * (dinnerList.length));
             replier.reply(dinnerList[randomNum]);
             break;
         }
