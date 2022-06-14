@@ -89,9 +89,8 @@ function binanceCalc(cmd) {
 }
 
 function getDominance() {
-  var temp = org.jsoup.Jsoup.connect("https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/historical").header("Authorization", "ac3987c6-1247-4091-add3-8084b8aa8477").ignoreContentType(true).get().text();
+  var temp = org.jsoup.Jsoup.connect("https://pro-api.coinmarketcap.com/v1/global-metrics/quotes/historical").header("X-CMC_PRO_API_KEY", "ac3987c6-1247-4091-add3-8084b8aa8477").ignoreContentType(true).get().text();
   temp = JSON.parse(temp);
-  temp = temp.blockPrices[0].baseFeePerGas;
   return temp + "\n" + " https://kr.tradingview.com/symbols/CRYPTOCAP-BTC.D/";
 }
 
