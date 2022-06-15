@@ -51,7 +51,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             replier.reply("준비중입니다.");
             break;
         case "로또": {
-            const selectIndex = (totalIndex, selectingNumber) => {
+            const selectIndexLotto = (totalIndex, selectingNumber) => {
                 let randomIndexArray = []
                 for (i = 0; i < selectingNumber; i++) {
                     randomNum = Math.floor(Math.random() * totalIndex) + 1;
@@ -63,7 +63,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
                 }
                 return randomIndexArray
             }
-            replier.reply(selectIndex(6, 45).sort((a, b) => a - b));
+            replier.reply(selectIndexLotto(45, 6).sort((a, b) => a - b));
             break;
         }
         case "랜덤": {
