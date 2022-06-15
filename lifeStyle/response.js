@@ -51,6 +51,22 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             replier.reply("준비중입니다.");
             break;
         case "로또": {
+            const selectIndex = (totalIndex, selectingNumber) => {
+                let randomIndexArray = []
+                for (i = 0; i < selectingNumber; i++) {
+                    randomNum = Math.floor(Math.random() * totalIndex) + 1;
+                    if (randomIndexArray.indexOf(randomNum) === -1) {
+                        randomIndexArray.push(randomNum)
+                    } else {
+                        i--
+                    }
+                }
+                return randomIndexArray
+            }
+            replier.reply(selectIndex(6, 45).sort((a, b) => a - b));
+            break;
+        }
+        case "로또": {
             if (Number(cmd[1]) > Number(cmd[2]) && (Number(cmd[1]) && Number(cmd[2]))) {
                 const selectIndex = (totalIndex, selectingNumber) => {
                     let randomIndexArray = []
