@@ -66,7 +66,7 @@ function response(room, msg, sender, isGroupChat, replier, imageDB, packageName)
             replier.reply(selectIndex(6, 45).sort((a, b) => a - b));
             break;
         }
-        case "로또": {
+        case "랜덤": {
             if (Number(cmd[1]) > Number(cmd[2]) && (Number(cmd[1]) && Number(cmd[2]))) {
                 const selectIndex = (totalIndex, selectingNumber) => {
                     let randomIndexArray = []
