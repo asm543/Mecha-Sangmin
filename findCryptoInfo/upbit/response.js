@@ -184,7 +184,7 @@ function response(room, msg, sender, isGroupChat, replier) {
                 data = JSON.parse(data);
                 var up = data[0].trade_price;
                 var bi = dotRegex(getKRWUSDPrice() * getBinancePrice(getBiSymbol(cmd[1])), 3);
-                replier.reply(cmd[1] + "의 김프는 " + dotRegex(((up / bi) - 1) * 100, 3) + "% 입니다.\n(업비트 : " + numEstablish(dotRegex(up, 3)) + "원 / 바이낸스 : " + numEstablish(bi) + "원");
+                replier.reply(cmd[1] + "의 김프는 " + dotRegex(((up / bi) - 1) * 100, 3) + "% 입니다.\n(업비트 : " + numEstablish(dotRegex(up, 1)) + "원 / 바이낸스 : " + numEstablish(bi) + "원");
             }
             break;
         }
@@ -206,7 +206,7 @@ function response(room, msg, sender, isGroupChat, replier) {
             if (getBiSymbol(cmd[1]) == undefined || getBiSymbol (cmd[1]) == null) {
                 replier.reply(cmd[1] + "(이)라는 암호화폐를 찾을 수 없습니다.\n심볼을 심볼명+거래단위 형식으로 등록해주세요.\nex) 바추가 비트 BTCBUSD");
             } else {
-                replier.reply("바이낸스의 " + getBiSymbol(cmd[1]) + "가격 : " + numEstablish(dotRegex(getBinancePrice(getBiSymbol(cmd[1])), 3)) + "달러입니다.\n(" + numEstablish(dotRegex(getKRWUSDPrice() * getBinancePrice(getBiSymbol(cmd[1])), 3)) + "원)");
+                replier.reply("바이낸스의 " + getBiSymbol(cmd[1]) + "가격 : " + numEstablish(dotRegex(getBinancePrice(getBiSymbol(cmd[1])), 3)) + "달러입니다.\n(" + numEstablish(dotRegex(getKRWUSDPrice() * getBinancePrice(getBiSymbol(cmd[1])), 1)) + "원)");
             }
             break;
         }
