@@ -45,7 +45,7 @@ function openSea(cmd) {
     var data = Utils.parse("https://api.opensea.io/api/v1/collection/" + mark).text();
     data = JSON.parse(data);
     var responseData = data.collection.stats
-    return cmd[1] + "의 오픈씨 거래 정보\n일 거래량 : " + dotRegex(responseData.one_day_volume, 3) + "ETH\n일 거래 횟수 : " + responseData.one_day_sales + "\n평균가격 : ⓔ " + dotRegex(responseData.average_price, 3) + " ⓚ " + dotRegex(getKlayPrice(responseData.average_price), 2) + "\n바닥가 : ⓔ " + dotRegex(responseData.floor_price, 3) + " ⓚ " + dotRegex(getKlayPrice(responseData.floor_price), 2) + "\n원화 : " + numEstablish(dotRegex(getKRWPrice(responseData.floor_price), 0)) + "원";
+    return cmd[1] + "의 오픈씨 거래 정보\n일 거래량 : " + dotRegex(responseData.one_day_volume, 3) + "ETH\n일 거래 횟수 : " + responseData.one_day_sales + "\n평균가격 : ⓔ " + dotRegex(responseData.average_price, 3) + " ⓚ " + dotRegex(getKlayPrice(responseData.average_price), 0) + "\n바닥가 : ⓔ " + dotRegex(responseData.floor_price, 3) + " ⓚ " + dotRegex(getKlayPrice(responseData.floor_price), 0) + "\n원화 : " + numEstablish(dotRegex(getKRWPrice(responseData.floor_price), 0)) + "원";
   }
 }
 
