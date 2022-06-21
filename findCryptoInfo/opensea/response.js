@@ -59,6 +59,16 @@ function openSeaLink(cmd) {
   }
 }
 
+function openSeaApi(cmd) {
+  var mark = getSlug(cmd[1]);
+  if (mark == null || mark == undefined) {
+    return "컬렉션을 추가해주세요. ex)추가 케이팝 kpopctzen-official\nhttps://opensea.io/collection/kpopctzen-official 에서 kpopctzen-official를 추가해주시면 됩니다.";
+  } else {
+    var data = "https://api.opensea.io/api/v1/collection/" + getSlug(cmd[1]);
+    return data;
+  }
+}
+
 function response(room, msg, sender, isGroupChat, replier) {
   var cmd = msg.split(" ");
   switch(cmd[0]){
@@ -74,6 +84,10 @@ function response(room, msg, sender, isGroupChat, replier) {
     }
     case "옾링": {
       replier.reply(openSeaLink(cmd));
+      break;
+    }
+    case "옾데": {
+      replier.reply(openSeaApi(cmd));
       break;
     }
     case "슬러그": {
