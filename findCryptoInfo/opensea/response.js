@@ -133,19 +133,19 @@ function response(room, msg, sender, isGroupChat, replier) {
     }
     case "레어추가": {
       addRare(cmd);
-      fs.write(path, JSON.stringify(rare));
+      fs.write(rarePath, JSON.stringify(rare));
       replier.reply(cmd[1] + "의 레어리티검색 추가되었습니다.");
       break;
     }
     case "레어수정": {
       rare[cmd[1]] = cmd[2];
-      fs.write(path, JSON.stringify(rare));
+      fs.write(rarePath, JSON.stringify(rare));
       replier.reply(cmd[1] + " 수정되었습니다.");
       break;
     }
     case "레어삭제": {
       delete rare[cmd[1]];
-      fs.write(path, JSON.stringify(rare));
+      fs.write(rarePath, JSON.stringify(rare));
       replier.reply(cmd[1] + " 삭제되었습니다.");
       break;
     }
