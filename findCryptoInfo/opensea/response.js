@@ -48,7 +48,7 @@ function getSlug(name) {
 }
 
 function addRare(cmd) {
-  rare[cmd[1]] = cmd[2];
+  rare[cmd[1]] = {head: cmd[2], tail: cmd[3]};
 }
 
 function getRare(name) {
@@ -103,7 +103,7 @@ function openSeaRare(cmd) {
   } else {
     cmd.forEach(token => {
       if(Number(token)){
-        var data = Utils.parse(mark + token).text();
+        var data = Utils.parse(mark.head + token + mark.tail).text();
         data = JSON.parse(data);
         data.attributes.forEach(item => {
           if(item.trait_type == cmd[2]){
@@ -138,7 +138,7 @@ function response(room, msg, sender, isGroupChat, replier) {
       break;
     }
     case "레어수정": {
-      rare[cmd[1]] = cmd[2];
+      rare[cmd[1]] = {head: cmd[2], tail: cmd[3]};
       fs.write(rarePath, JSON.stringify(rare));
       replier.reply(cmd[1] + " 수정되었습니다.");
       break;
