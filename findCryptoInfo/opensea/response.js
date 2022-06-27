@@ -127,8 +127,16 @@ function response(room, msg, sender, isGroupChat, replier) {
       replier.reply(openSeaLink(cmd[1]));
       break;
     }
+    case "리스팅": {
+      var data = Utils.parse("https://api.opensea.io/api/v1/collection/" + mark + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").text();
+      replier.reply(data);
+    }
     case "레어": {
       replier.reply(openSeaRare(cmd));
+      break;
+    }
+    case "레어보기": {
+      replier.reply(JSON.stringify(rare));
       break;
     }
     case "레어추가": {
