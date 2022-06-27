@@ -129,7 +129,7 @@ function response(room, msg, sender, isGroupChat, replier) {
     }
     case "리스팅": {
       // var data = Utils.parse("https://api.opensea.io/api/v1/collection/" + mark + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").text();
-      var data = org.jsoup.Jsoup.connect("https://api.opensea.io/api/v1/collection/" + getSlug(cmd[1]) + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").ignoreContentType(true).get().text();
+      var data = org.jsoup.Jsoup.connect("https://opensea.io/collection/" + getSlug(cmd[1]) + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").ignoreContentType(true).get().text();
       replier.reply(data);
       break;
     }
