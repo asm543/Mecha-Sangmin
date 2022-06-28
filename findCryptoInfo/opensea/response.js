@@ -93,24 +93,31 @@ function openSeaLink(cmd) {
   }
 }
 
+function getListings(slug) {
+  var data = org.jsoup.Jsoup.connect("https://opensea.io/collection/" + getSlug(slug) + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8").header("accept-encoding", "gzip, deflate, sdch").header("Accept-language", "zh-cn,zh;q=0.8").header("user-agent", "mozilla/5.0 (Windows NT 10.0;  WOW64) applewebkit/537.36 (khtml, like Gecko) chrome/55.0.2883.87 safari/537.36 ").get().select("a[class=sc-1pie21o-0 elyzfO Asset--anchor]");
+  var returnArray = []
+
+  data.forEach(item => {
+    returnArray.push(item.attr("href").split("/")[4])
+  })
+  return returnArray;
+}
+
 function openSeaRare(cmd) {
   var mark = getRare(cmd[1]);
+  var listings = getListings(cmd[1]);
   var returnData = "";
-  if(cmd.length < 4) {
-    return "오류 - 레어 '검색할 컬렉션명' '검색할 속성명' 토큰번호 토큰번호 토큰번호 .... 순으로 입력해주세요.";
-  } else if (mark == null || mark == undefined) {
+  if (mark == null || mark == undefined) {
     return "레어리티를 보고싶은 컬렉션의 데이터주소를 토큰번호 제외하고 추가해주세요. ex)추가 케이팝 https://rowoonlabs.mypinata.cloud/ipfs/QmdLgdpuCbohDDkYMyk2rTLo2oFBYSUYcarBvknPqC15ie/";
   } else {
-    cmd.forEach(token => {
-      if(Number(token)){
-        var data = Utils.parse(mark.head + token + mark.tail).text();
+    listings.forEach(token => {
+      var data = Utils.parse(mark.head + token + mark.tail).text();
         data = JSON.parse(data);
         data.attributes.forEach(item => {
           if(item.trait_type == cmd[2]){
             returnData += token + " : " + item.value + "\n";
           }
         })
-      }
     })
   }
   return returnData;
@@ -125,17 +132,6 @@ function response(room, msg, sender, isGroupChat, replier) {
     }
     case "옾링": {
       replier.reply(openSeaLink(cmd[1]));
-      break;
-    }
-    case "리스팅": {
-      // var data = Utils.parse("https://opensea.io/collection/" + getSlug(cmd[1]) + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").text();
-      var data = org.jsoup.Jsoup.connect("https://opensea.io/collection/" + getSlug(cmd[1]) + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8").header("accept-encoding", "gzip, deflate, sdch").header("Accept-language", "zh-cn,zh;q=0.8").header("user-agent", "mozilla/5.0 (Windows NT 10.0;  WOW64) applewebkit/537.36 (khtml, like Gecko) chrome/55.0.2883.87 safari/537.36 ").get().select("a[class=sc-1pie21o-0 elyzfO Asset--anchor]");
-      var returnText = ""
-      
-      data.forEach(item => {
-        returnText += item.attr("href").split("/")[4] + " "
-      })
-      replier.reply(returnText);
       break;
     }
     case "레어": {
