@@ -109,7 +109,7 @@ function openSeaRare(cmd) {
   var returnData = "";
   if (mark == null || mark == undefined) {
     return "레어리티를 보고싶은 컬렉션의 데이터주소를 토큰번호 제외하고 추가해주세요. ex)추가 케이팝 https://rowoonlabs.mypinata.cloud/ipfs/QmdLgdpuCbohDDkYMyk2rTLo2oFBYSUYcarBvknPqC15ie/";
-  } else {
+  } else if (cmd.length == 3) {
     listings.forEach(token => {
       var data = Utils.parse(mark.head + token + mark.tail).text();
         data = JSON.parse(data);
@@ -118,6 +118,18 @@ function openSeaRare(cmd) {
             returnData += token + " : " + item.value + "\n";
           }
         })
+    })
+  } else {
+    cmd.forEach(token => {
+      if(Number(token)){
+        var data = Utils.parse(mark.head + token + mark.tail).text();
+        data = JSON.parse(data);
+        data.attributes.forEach(item => {
+          if(item.trait_type == cmd[2]){
+            returnData += token + " : " + item.value + "\n";
+          }
+        })
+      }
     })
   }
   return returnData;
