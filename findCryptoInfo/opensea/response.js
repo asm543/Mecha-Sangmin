@@ -127,10 +127,15 @@ function response(room, msg, sender, isGroupChat, replier) {
       replier.reply(openSeaLink(cmd[1]));
       break;
     }
-        case "리스팅": {
-     // var data = Utils.parse("https://opensea.io/collection/" + getSlug(cmd[1]) + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").text();
-     var data = org.jsoup.Jsoup.connect("https://opensea.io/collection/" + getSlug(cmd[1]) + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8").header("accept-encoding", "gzip, deflate, sdch").header("Accept-language", "zh-cn,zh;q=0.8").header("user-agent", "mozilla/5.0 (Windows NT 10.0;  WOW64) applewebkit/537.36 (khtml, like Gecko) chrome/55.0.2883.87 safari/537.36 ").get().body();
-      replier.reply(data);
+    case "리스팅": {
+      // var data = Utils.parse("https://opensea.io/collection/" + getSlug(cmd[1]) + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").text();
+      var data = org.jsoup.Jsoup.connect("https://opensea.io/collection/" + getSlug(cmd[1]) + "?search[sortAscending]=true&search[sortBy]=PRICE&search[toggles][0]=BUY_NOW").header("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8").header("accept-encoding", "gzip, deflate, sdch").header("Accept-language", "zh-cn,zh;q=0.8").header("user-agent", "mozilla/5.0 (Windows NT 10.0;  WOW64) applewebkit/537.36 (khtml, like Gecko) chrome/55.0.2883.87 safari/537.36 ").get().select("a[class=sc-1pie21o-0 elyzfO Asset--anchor]");
+      var returnText = ""
+      
+      data.forEach(item => {
+        returnText += item.attr("href").split("/")[4] + " "
+      })
+      replier.reply(returnText);
       break;
     }
     case "레어": {
