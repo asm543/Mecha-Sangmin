@@ -231,6 +231,10 @@ function response(room, msg, sender, isGroupChat, replier) {
                 replier.reply("변환실패 - \"변환 1 BTC ETH\" 형식으로 입력해주세요.");
             } else replier.reply(getConvert(cmd[1], markFr, markTo));
             break;
-        } 
+        }
+        case "달러": {
+          replier.reply(getKRWUSDPrice());
+          break;
+        }
     }
 }
