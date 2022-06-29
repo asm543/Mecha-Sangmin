@@ -135,6 +135,11 @@ function openSeaRare(cmd) {
   return returnData;
 }
 
+function getDate() {
+  var today = new Date();
+  return today;
+}
+
 function response(room, msg, sender, isGroupChat, replier) {
   var cmd = msg.split(" ");
   switch (cmd[0]) {
@@ -229,6 +234,10 @@ function response(room, msg, sender, isGroupChat, replier) {
       delete popol[sender][cmd[1]];
       fs.write(popolPath, JSON.stringify(popol));
       replier.reply(sender + "님의 옾폴에서 " + cmd[1] + "(이)가 삭제되었습니다.");
+      break;
+    }
+    case "현재시간": {
+      replier.reply(getDate().getHour() + "시 " + getDate().getMinute() + "분 " + getDate().getSecond() + "초");
       break;
     }
   }
